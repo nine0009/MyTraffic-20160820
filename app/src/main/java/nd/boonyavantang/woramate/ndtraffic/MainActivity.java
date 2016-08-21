@@ -16,16 +16,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String urlYouTube = "https://youtu.be/SqivSUNDfqI";
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //this statement
         setContentView(R.layout.activity_main);
         // bind widget
-        trafficListView= (ListView) findViewById(R.id.listView);
-        aboutMeButton= (Button) findViewById(R.id.button);
+        trafficListView = (ListView) findViewById(R.id.listView);
+        aboutMeButton = (Button) findViewById(R.id.button);
 
         // get event from click button
         aboutMeButton.setOnClickListener(new View.OnClickListener() {
@@ -41,10 +38,60 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
 
-
-
             }   //on click
         });
+
+        // create listview
+        // 1.setup basic array
+        int[] iconInts = new int[20];
+        iconInts[0] = R.drawable.traffic_01;
+        iconInts[1] = R.drawable.traffic_02;
+        iconInts[2] = R.drawable.traffic_03;
+        iconInts[3] = R.drawable.traffic_04;
+        iconInts[4] = R.drawable.traffic_05;
+        iconInts[5] = R.drawable.traffic_06;
+        iconInts[6] = R.drawable.traffic_07;
+        iconInts[7] = R.drawable.traffic_08;
+        iconInts[8] = R.drawable.traffic_09;
+        iconInts[9] = R.drawable.traffic_10;
+        iconInts[10] = R.drawable.traffic_11;
+        iconInts[11] = R.drawable.traffic_12;
+        iconInts[12] = R.drawable.traffic_13;
+        iconInts[13] = R.drawable.traffic_14;
+        iconInts[14] = R.drawable.traffic_15;
+        iconInts[15] = R.drawable.traffic_16;
+        iconInts[16] = R.drawable.traffic_17;
+        iconInts[17] = R.drawable.traffic_18;
+        iconInts[18] = R.drawable.traffic_19;
+        iconInts[19] = R.drawable.traffic_20;
+
+        // 2.setup array from other class
+        MyData myData = new MyData();
+        String[] titleStrings = myData.getTitleStrings();
+
+        // 3.setup array from other xml
+        String[] detailStrings=getResources().getStringArray(R.array.detail);
+        int[] ints = myData.getInts();
+        String[] stockStrings = new String[ints.length];
+        String[] priceStrings = new String[ints.length];
+        for (int i=0;i<ints.length;i+=1) {
+            stockStrings[i] = "Stock =" + Integer.toString(ints[i]);
+            priceStrings[i]=Integer.toString(ints[i])+" บาท";
+
+        } //for
+
+
+
+        // sub string
+        String[] detailShortStrings = new String[detailStrings.length];
+        for (int i=0; i<detailStrings.length; i+=1){
+            detailShortStrings[i]=detailStrings[i].substring(0,40)+"...";
+
+        } //for
+
+        TrafficAdapter trafficAdapter = new TrafficAdapter(this, iconInts, titleStrings, detailShortStrings, stockStrings, priceStrings);
+        trafficListView.setAdapter(trafficAdapter);
+
 
     }   //main method
 }   //main class
