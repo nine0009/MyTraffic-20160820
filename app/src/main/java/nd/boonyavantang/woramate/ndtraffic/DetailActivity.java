@@ -2,6 +2,7 @@ package nd.boonyavantang.woramate.ndtraffic;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +36,17 @@ public class DetailActivity extends AppCompatActivity {
         titleTextView.setText(strTitle);
         imageView.setImageResource(intImage);
         detailTextView.setText((strDetail));
+
+        //OnClick Back Button
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+
 
     } // main method
 } //main class
