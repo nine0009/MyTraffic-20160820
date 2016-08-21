@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         // create listview
         // 1.setup basic array
-        int[] iconInts = new int[20];
+        final int[] iconInts = new int[20];
         iconInts[0] = R.drawable.traffic_01;
         iconInts[1] = R.drawable.traffic_02;
         iconInts[2] = R.drawable.traffic_03;
@@ -67,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
         // 2.setup array from other class
         MyData myData = new MyData();
-        String[] titleStrings = myData.getTitleStrings();
+        final String[] titleStrings = myData.getTitleStrings();
 
         // 3.setup array from other xml
-        String[] detailStrings=getResources().getStringArray(R.array.detail);
+        final String[] detailStrings=getResources().getStringArray(R.array.detail);
         int[] ints = myData.getInts();
         String[] stockStrings = new String[ints.length];
         String[] priceStrings = new String[ints.length];
@@ -91,6 +92,22 @@ public class MainActivity extends AppCompatActivity {
 
         TrafficAdapter trafficAdapter = new TrafficAdapter(this, iconInts, titleStrings, detailShortStrings, stockStrings, priceStrings);
         trafficListView.setAdapter(trafficAdapter);
+
+        //onClick ListView
+        trafficListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Intent to Detail Activity
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("Title", titleStrings[i]);
+                intent.putExtra("Icon", iconInts[i]);
+                intent.putExtra("Detail", detailStrings[i]);
+                startActivity(intent);
+
+
+
+            } //onClick ListView
+        });
 
 
     }   //main method
