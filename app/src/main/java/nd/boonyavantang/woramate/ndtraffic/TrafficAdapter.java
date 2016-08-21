@@ -61,6 +61,7 @@ public class TrafficAdapter extends BaseAdapter{
         stockTextView.setText(stockStrings[i]);
         priceTextView.setText(priceStrings[i]);
 
+
         return view1;
 
 
