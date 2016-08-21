@@ -1,6 +1,8 @@
 package nd.boonyavantang.woramate.ndtraffic;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,10 @@ public class MainActivity extends AppCompatActivity {
     // explicit or variable ประกาศตัวแปล
     private ListView trafficListView;
     private Button aboutMeButton;
+    private static final String urlYouTube = "https://youtu.be/SqivSUNDfqI";
+
+
+
 
 
     @Override
@@ -30,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.start();
 
                 //intent to WebView
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(urlYouTube));
+                startActivity(intent);
+
 
 
 
